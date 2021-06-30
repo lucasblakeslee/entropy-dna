@@ -4,19 +4,54 @@ import math
 import numpy as np
 import collections
 from collections import Counter
+import matplotlib.pyplot as plt
 
-seq = "tatgagtcatcacataaaagctaatgtagtaaagcatccataccaattgatttaaaattaaactaatccgttgataaaacaaaaaatcaagagccttgagtcactccagactgagaagattgactcaagaacaaattttatttttattttattagaggctccattggaaaaataagacctaaacattaatcgagaagtgatgggaacgatggaacctgtaaatacataagatgttactgaaaacaaatcttaatgatttattgggaggatagcgaaatgaaccagaagacaatcgatttattttattatgagagatcatgggttacctctacaaataaaataactattgaaagactaaatatgcaagaggaaatattcgcccgcgaagattttttttatattctttttgattgctaaatttgatcaatctgatatcctaattcgaatatataaaaaaatttgttacaaccttataacaaataacaaaaacactattattgaaaatcaaaaaataaaatagaaaaaattctctataattataattaatgtgtataactagaataattttttctatttctatctataactattagatctagaactagtagaactctaaaatagaatatagattctaatttatatatattagatacaaatttatattctactaatattctattctacctaatatcctattctaataatctaagattctaatactaataaatagatcgaataagtaagaaataaattaaaataaatagatttaactaaattaagtgaaatctcaaagaatacgatgatttaatatattattttattcgtaaaagacatggatatttttttttaatcatttcattcgcgaggagctggatgagaagaaattctcatgtccggttctgtagtagagatggaattgagaaataaccatcaactataaccccaaaagaacccgattccgtaaacaacatagaggaagaatgaaaggaatagcttttcgaggaaatcgtatttgttttggaagatatgctcttcaagcacttgaatccgcttggattacatctaga"
-randomseq = "".join(np.random.choice(["a","t","c","g"], size=len(seq)))
-#from Euphorbia iharanae genome, arbitrary choice
 
-seq_list = list(seq)
-#splits the string into a list
+seq = open("populus_deltoides_seq.txt", "r")
+seq = seq.read()
 
-def Shannon_entropy_func(sequence, blocksize):
-    N=len(sequence) -blocksize +1
-    Block=[sequence[i:i +blocksize] for i in range(N)]
-    entropy = sum([math.log(float(N)/Block.count(b)) for b in Block])/N
-    return (entropy)
+#it's worth noting that this is an exon; it's actively expressed, so
+#we would expect the entropy to be lower than an intron which aren't
+#subject to evolutionary pressures.
+
+randomseq = "".join(np.random.choice(["A","T","C","G"], size=len(seq)))
+
+dmpvalue_list = []
+randvalue_list = []
+
+def main():
+    for blocksize in range(1, 20):
+        # Using seq instead of seq_list lets you treat the subsequences as
+        # strings instead of lists, which is faster
+
+        """
+        The block size should probably be around the base-4 log of the
+        total length. This for a random sequence would give about 1 copy on
+        average of each possible substring. Therefore if you have a few
+        strings that have many more than one copy, the sequence is not
+        random. You can also see how many copies of strings you get that are
+        several times that.
+        """
+        
+        dmpvalue = Shannon_entropy_dmp(seq, blocksize)
+        randvalue = Shannon_entropy_dmp(randomseq, blocksize)
+        
+        dmpvalue_list.append(dmpvalue)
+        randvalue_list.append(randvalue)
+
+        print(f"{blocksize:10d}     {dmpvalue:8.3f}     {randvalue:8.3f}")
+    plt.plot(dmpvalue_list)
+    plt.plot(randvalue_list)
+    plt.show()
+
+
+
+"""
+The last line is a very inefficient way of multiplying the number of
+copies by the log of the number of copies.  For each of N entries in
+block, you are searching through all N entries to find a match, which
+means that the time it takes will go as N^2
+"""
 
 def Shannon_entropy_dmp(sequence, blocksize):
     N = len(sequence) - blocksize + 1
@@ -32,45 +67,15 @@ def Shannon_entropy_dmp(sequence, blocksize):
     return entropy
 
 
-for blocksize in range(1, 20):
-    # Using seq instead of seq_list lets you treat the subsequences as
-    # strings instead of lists, which is faster
-    slowvalue = Shannon_entropy_func(seq, blocksize)
-    dmpvalue = Shannon_entropy_dmp(seq, blocksize)
-    randvalue = Shannon_entropy_dmp(randomseq, blocksize)
-    print(f"{blocksize:10d} {slowvalue:8.3f}  {dmpvalue:8.3f}     {randvalue:8.3f}")
-
-    #    blocksize += 1
-
-#goes through every block length 1 - 500 (somewhat arbitrary max
-#limit, need to look into where is the proper place to stop) and
-#calculates entropy for that block.
-
-#Still need to sum these all up
+def Shannon_entropy_func(sequence, blocksize):
+    """
+    inefficient, not currently in use
+    """
+    N=len(sequence) -blocksize +1
+    Block=[sequence[i:i +blocksize] for i in range(N)]
+    entropy = sum([math.log(float(N)/Block.count(b)) for b in Block])/N
+    return (entropy)
 
 
 
-
-
-
-
-
-#----------------some old portions--------------------------
-
-#n = len(seq)
-# n = math.log((len(seq)), 4)
-
-# n = int(n)
-# results in approximately log base-4 of len(s) Here is
-# where things feel illegal...the below arguments require an integer
-# for n, whereas this n is a float. Converting i to the integer n gets
-# rid of all the spicy information contained within, so we'll need to
-# find a different way to do this.
-
-# counts = Counter([s[i:i+n] for i in range(len(seq) - n)])
-# iterates through every possible 5 letter "word" that appears in
-# the original sequence, with overlaps
-# in this case, 'aaata' appears the greatest number of times (15).
-# shouldn't this iterate through words of every length rather than just 5 letter ones?
-
-# shannon_entropy = Sfunction(sum([count * math.log(count) for count in counts.values()]))
+main()
