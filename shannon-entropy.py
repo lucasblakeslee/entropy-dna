@@ -50,12 +50,13 @@ def Shannon_entropy_dmp(sequence, blocksize):
     counter = Counter([sequence[i:i+blocksize] for i in range(N)])
     counts = np.array(list(counter.values()))
 
-    # The following normalizations are to match Shannon_entropy_func
-    # and are not necessarily correct
-    normalization = -1/N
+    normalization = 1/N
     normalization_add = np.log(N)
 
-    entropy = np.sum(counts * np.log(counts)) * normalization + normalization_add
+    # it seems the way to normalize entropy is by dividing it by
+    # information length, the ratio of which is metric entropy
+
+    entropy = - np.sum(counts * np.log(counts)) * normalization + normalization_add
     return entropy
 
 
