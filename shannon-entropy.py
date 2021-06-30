@@ -20,18 +20,11 @@ dmpvalue_list = []
 randvalue_list = []
 
 def main():
-    for blocksize in range(1, 20):
+    for blocksize in range(1, 13):
+        # values plateau around 10-11 for block size range.
+        
         # Using seq instead of seq_list lets you treat the subsequences as
         # strings instead of lists, which is faster
-
-        """
-        The block size should probably be around the base-4 log of the
-        total length. This for a random sequence would give about 1 copy on
-        average of each possible substring. Therefore if you have a few
-        strings that have many more than one copy, the sequence is not
-        random. You can also see how many copies of strings you get that are
-        several times that.
-        """
         
         dmpvalue = Shannon_entropy_dmp(seq, blocksize)
         randvalue = Shannon_entropy_dmp(randomseq, blocksize)
