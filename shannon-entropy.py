@@ -45,14 +45,6 @@ def main():
     plt.show()
 
 
-
-"""
-The last line is a very inefficient way of multiplying the number of
-copies by the log of the number of copies.  For each of N entries in
-block, you are searching through all N entries to find a match, which
-means that the time it takes will go as N^2
-"""
-
 def Shannon_entropy_dmp(sequence, blocksize):
     N = len(sequence) - blocksize + 1
     counter = Counter([sequence[i:i+blocksize] for i in range(N)])
