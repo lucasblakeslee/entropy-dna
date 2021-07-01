@@ -35,6 +35,8 @@ def main():
         print(f"{blocksize:10d}     {dmpvalue:8.3f}     {randvalue:8.3f}")
     plt.plot(dmpvalue_list)
     plt.plot(randvalue_list)
+    plt.xlabel("Block size")
+    plt.ylabel("Measured entropy")
     plt.show()
 
 

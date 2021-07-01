@@ -22,6 +22,13 @@ def main():
     koslicki_definition(seq, n)
 
 def find_n(seq_len):
+    """gives a genuinely very interesting result, 6 in the case of the
+    populous deltoides shotgun genome, and we can see in the shannon
+    entropy calculation that the difference in entropy between the
+    random and the natural sequences is greatest around 6. This
+    doesn't seem like pure coincidence...
+
+    """
     # let seq be a finite sequence of length |seq| (here len(seq)),
     # let n be the unique integer such that:
     # 4**(n) + n - 1 <= len(seq) < 4**(n+1) + (n + 1) - 1
@@ -33,6 +40,7 @@ def find_n(seq_len):
     # probably can be done with some kind of calculation to
     # approximate n first and then a local range can be searched.
 
+    
 def koslicki_definition(seq, n):
     Htop = (math.log(complexity_function(seq**(4**n +n -1)(n)), 4)/n)
     return Htop
@@ -40,5 +48,10 @@ def koslicki_definition(seq, n):
 def complexity_function(seq, n):
     #for a given sequence w, the complexity function pw:N -> N is defined as
     #pw(n) = |{u:|u|=n and u appears as a subword of w}|
+
+    #supposedly somewhat similar to the method for calculating the
+    #metric entropy of the string. Pw(n) represents the number of
+    #different n-length subwords (with overlaps) that appear in the
+    #string w.
 
 main()
