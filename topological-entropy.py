@@ -32,15 +32,17 @@ def find_n(seq_len):
             return n
     
 def koslicki_definition(seq, n):
-    topological_entropy = (math.log(complexity_function(seq**(4**n +n -1)(n)), 4)/n)
-    return Htop
+    P = complexity_function(seq, n)
+    topological_entropy = ((math.log(P**(4**n +n -1),4))/(n))
+    return topological_entropy
 
 def complexity_function(seq, blocksize):
     #for a given sequence w, the complexity function pw:N -> N is defined as
     #p(n) = |{u:|u|=n and u appears as a subword of w}|
   
-    res = [seq[x:y] for x, y in combinations(range(len(seq) + 1), r = 2) if len(seq[x:y]) == blocksize ]
+    combos = [seq[x:y] for x, y in combinations(range(len(seq) + 1), r = 2) if len(seq[x:y]) == blocksize ]
     #extract 'blocksize' length substrings using itertools.combinations()
-    return(str(res))
+    unique_combos = set(combos)
+    return(len(unique_combos))
 
 main()
