@@ -39,8 +39,10 @@ def koslicki_definition(seq, n):
 def complexity_function(seq, blocksize):
     #for a given sequence w, the complexity function pw:N -> N is defined as
     #p(n) = |{u:|u|=n and u appears as a subword of w}|
-  
-    combos = [seq[x:y] for x, y in combinations(range(len(seq) + 1), r = 2) if len(seq[x:y]) == blocksize ]
+    #p(n) should be a representation of the number of n-length subwrds that appear in w
+
+    combos = [seq[i:(i+blocksize)] for i in range(len(seq)+1-blocksize)]
+    
     #extract 'blocksize' length substrings using itertools.combinations()
     unique_combos = set(combos)
     return(len(unique_combos))
