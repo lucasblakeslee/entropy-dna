@@ -67,5 +67,6 @@ def Shannon_entropy_func(sequence, blocksize):
     return (entropy)
 
 
-
-main()
+if __name__ == "__main__":
+    # execute only if run as a script
+    main()

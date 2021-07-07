@@ -42,9 +42,9 @@ def complexity_function(seq, blocksize):
     #p(n) should be a representation of the number of n-length subwrds that appear in w
 
     combos = [seq[i:(i+blocksize)] for i in range(len(seq)+1-blocksize)]
-    
-    #extract 'blocksize' length substrings using itertools.combinations()
     unique_combos = set(combos)
     return(len(unique_combos))
 
-main()
+if __name__ == "__main__":
+    # execute only if run as a script
+    main()
