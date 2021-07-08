@@ -1,5 +1,7 @@
 #!/bin/usr/env/Python3
 
+from collections import Counter
+
 """goal of this program is to:
 
 1. get a representative sample of genomes for a certain organism class
@@ -72,3 +74,26 @@ sulfurovum_lithotrophicum_seq = sulfurovum_lithotrophicum_seq.replace("\n", "")
 
 ###################################################################################################
 # Part 2: Find all subsequences #
+
+
+def main():
+    """
+    Makes a huge file, do not run
+    """
+    with open("epsilonproteobacteria_database.txt", 'a') as file1:
+        for blocksize in range(3):
+            a = find_all_subsequences(sulfurovum_lithotrophicum_seq, blocksize)
+            my_dict = {i:a.count(i) for i in a}
+            for item in my_dict:
+                file1.write("%s\n" % item)
+
+def find_all_subsequences(seq, blocksize):
+    """Finds a list of all subsequences contained within the sequence
+    'seq' of length 'blocksize.'
+
+    """
+    combos = [seq[i:(i+blocksize)] for i in range(len(seq)+1-blocksize)]
+    return combos
+
+if __name__ == "__main__":
+    main()
