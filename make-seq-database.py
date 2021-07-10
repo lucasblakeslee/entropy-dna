@@ -1,6 +1,9 @@
 #!/bin/usr/env/Python3
 
 from collections import Counter
+import numpy as np
+from pathlib import Path
+
 
 """goal of this program is to:
 
@@ -78,14 +81,42 @@ sulfurovum_lithotrophicum_seq = sulfurovum_lithotrophicum_seq.replace("\n", "")
 
 def main():
     """
-    Makes a huge file, do not run
     """
-    with open("epsilonproteobacteria_database.txt", 'a') as file1:
-        for blocksize in range(3):
-            a = find_all_subsequences(sulfurovum_lithotrophicum_seq, blocksize)
-            my_dict = {i:a.count(i) for i in a}
-            for item in my_dict:
-                file1.write("%s\n" % item)
+    filename = Path("epsilonproteobacteria/sulfurovum-lithotrophicum.fasta")
+    seq = read_sequence(filename)
+    out_filename = filename.with_suffix(".db_txt").name
+    entropy = make_database(out_filename, seq, 10)
+    print(entropy)
+    
+def read_sequence(filename):
+    seqfile = open(filename, "r")
+    _=seqfile.readline()
+    seq = seqfile.read()
+    seq = seq.replace("\n", "")
+    seq = seq.upper()
+    #fixme: eliminate non ATCG values
+    return seq
+                
+
+        
+def make_database(out_filename, sequence, max_blocksize=20, min_count=5):
+    result = []
+    with open(out_filename, 'w') as out_file:
+        for blocksize in range(1, max_blocksize+1):
+            my_counts = count_all_subsequences(sequence, blocksize)
+            for item, count in my_counts.most_common():
+                if count < min_count:
+                    break
+                out_file.write(f"{item:s} {count}\n")
+            entropy = np.sum(count*np.log(count) for count in my_counts.values()) *1/len(sequence)
+            result.append((blocksize, entropy))
+    return np.array(result)
+
+
+def count_all_subsequences(seq, blocksize):
+    counter = Counter(seq[i:(i+blocksize)] for i in range(len(seq)+1-blocksize))
+    return counter
+
 
 def find_all_subsequences(seq, blocksize):
     """Finds a list of all subsequences contained within the sequence
