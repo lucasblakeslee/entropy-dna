@@ -3,6 +3,7 @@
 from collections import Counter
 import numpy as np
 from pathlib import Path
+from Bio import SeqIO
 
 
 """goal of this program is to:
@@ -80,23 +81,24 @@ sulfurovum_lithotrophicum_seq = sulfurovum_lithotrophicum_seq.replace("\n", "")
 
 
 def main():
+    """Gets FASTA file from directory, reads it using SeqIO.parse, and
+    then obtains sequences (outside of comments). The
+    Bio.SeqRecord.SeqRecord class is very useful for storing other
+    information about the sequence, but for now we're just interested
+    in the sequence itself.
+
     """
-    """
-    filename = Path("epsilonproteobacteria/sulfurovum-lithotrophicum.fasta")
-    seq = read_sequence(filename)
+    in_filename = "epsilonproteobacteria/sulfurovum-lithotrophicum.fasta"
+    filename = Path('epsilonproteobacteria/sulfurovum-lithotrophicum.fasta')
+    sequences = SeqIO.parse(in_filename, 'fasta')
+    for record in sequences:
+        example = record
+    seq = str(example.seq)
+    #fixme: eliminate non AGTC values
+    
     out_filename = filename.with_suffix(".db_txt").name
     entropy = make_database(out_filename, seq, 10)
-    print(entropy)
-    
-def read_sequence(filename):
-    seqfile = open(filename, "r")
-    _=seqfile.readline()
-    seq = seqfile.read()
-    seq = seq.replace("\n", "")
-    seq = seq.upper()
-    #fixme: eliminate non ATCG values
-    return seq
-                
+    print(entropy)                
 
         
 def make_database(out_filename, sequence, max_blocksize=20, min_count=5):
@@ -128,3 +130,5 @@ def find_all_subsequences(seq, blocksize):
 
 if __name__ == "__main__":
     main()
+
+
