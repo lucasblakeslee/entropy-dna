@@ -5,22 +5,6 @@ import numpy as np
 from pathlib import Path
 from Bio import SeqIO
 
-
-"""goal of this program is to:
-
-1. get a representative sample of genomes for a certain organism class
-from the NCBI Genome website (I plan to do this in the future,
-currently just using downloaded FASTA files)
-
-2. find the most commonly occuring sequences occuring in those genomes
-and rank them (including those that appear 0 times)
-
-3. write that information to a file (still need to decide on format
-but leaning towards csv with column 1 being the sequence and column 2
-being the number of times it occurs
-
-"""
-
 # Part 1 -- obtaining organisms' sequences
 
 #1a. gammaproteobacteria
@@ -36,6 +20,7 @@ being the number of times it occurs
 #"epsilonproteobacteria/sulfurovum-lithotrophicum.fasta"
 
 # Part 2 -- making databases
+
 def main():
     """Gets FASTA file from directory, reads it using SeqIO.parse, and
     then obtains sequences (outside of comments). The
@@ -86,5 +71,3 @@ def find_all_subsequences(seq, blocksize):
 
 if __name__ == "__main__":
     main()
-
-
