@@ -24,21 +24,18 @@ being the number of times it occurs
 # Part 1 -- obtaining organisms' sequences
 
 #1a. gammaproteobacteria
-
-legionella_pneumophila_seq = open("gammaproteobacteria/legionella-pneumophila.fasta", "r")
-
+#"gammaproteobacteria/legionella-pneumophila.fasta"
 #"gammaproteobacteria/amphritea-japonica.fasta"
 #"gammaproteobacteria/haemophilus-influenzae.fasta"
 #"gammaproteobacteria/xanthomonas-citri.fasta"
 
-#-----------------------------------------------------------------
 #1b. epsilonproteobacteria
 #"epsilonproteobacteria/caminibacter-mediatlanticus.fasta"
 #"epsilonproteobacteria/helicobacter-pylori.fasta"
 #"epsilonproteobacteria/campylobacter-jejuni.fasta"
 #"epsilonproteobacteria/sulfurovum-lithotrophicum.fasta"
 
-
+# Part 2 -- making databases
 def main():
     """Gets FASTA file from directory, reads it using SeqIO.parse, and
     then obtains sequences (outside of comments). The
