@@ -25,59 +25,18 @@ being the number of times it occurs
 
 #1a. gammaproteobacteria
 
-#i. Legionella pneumophila sequence
 legionella_pneumophila_seq = open("gammaproteobacteria/legionella-pneumophila.fasta", "r")
-next(legionella_pneumophila_seq)                  # advanced file pointer to next line
-legionella_pneumophila_seq = legionella_pneumophila_seq.read()
-legionella_pneumophila_seq = legionella_pneumophila_seq.replace("\n", "")
 
-#ii. Amphritea japonica sequence
-amphritea_japonica_seq = open("gammaproteobacteria/amphritea-japonica.fasta", "r")
-next(amphritea_japonica_seq)
-amphritea_japonica_seq = amphritea_japonica_seq.read()
-amphritea_japonica_seq = amphritea_japonica_seq.replace("\n", "")
-
-#iii. Haemophilus influenzae sequence
-haemophilus_influenzae_seq = open("gammaproteobacteria/haemophilus-influenzae.fasta", "r")
-next(haemophilus_influenzae_seq)
-haemophilus_influenzae_seq = haemophilus_influenzae_seq.read()
-haemophilus_influenzae_seq = haemophilus_influenzae_seq.replace("\n", "")
-
-#iv. Xanthomonas citri sequence
-xanthomonas_citri_seq = open("gammaproteobacteria/xanthomonas-citri.fasta", "r")
-next(xanthomonas_citri_seq)
-xanthomonas_citri_seq = xanthomonas_citri_seq.read()
-xanthomonas_citri_seq = xanthomonas_citri_seq.replace("\n", "")
+#"gammaproteobacteria/amphritea-japonica.fasta"
+#"gammaproteobacteria/haemophilus-influenzae.fasta"
+#"gammaproteobacteria/xanthomonas-citri.fasta"
 
 #-----------------------------------------------------------------
 #1b. epsilonproteobacteria
-
-#i. Caminibacter mediatlanticus sequence
-caminibacter_mediatlanticus_seq = open("epsilonproteobacteria/caminibacter-mediatlanticus.fasta", "r")
-next(caminibacter_mediatlanticus_seq)
-caminibacter_mediatlanticus_seq = caminibacter_mediatlanticus_seq.read()
-caminibacter_mediatlanticus_seq = caminibacter_mediatlanticus_seq.replace("\n", "")
-
-#ii. Helicobacter pylori sequence
-helicobacter_pylori_seq = open("epsilonproteobacteria/helicobacter-pylori.fasta", "r")
-next(helicobacter_pylori_seq)
-helicobacter_pylori_seq = helicobacter_pylori_seq.read()
-helicobacter_pylori_seq = helicobacter_pylori_seq.replace("\n", "")
-
-#iii. Campylobacter jejuni sequence
-campylobacter_jejuni_seq = open("epsilonproteobacteria/campylobacter-jejuni.fasta", "r")
-next(campylobacter_jejuni_seq)
-campylobacter_jejuni_seq = campylobacter_jejuni_seq.read()
-campylobacter_jejuni_seq = campylobacter_jejuni_seq.replace("\n", "")
-
-#iv. Sulfurovum lithotrophicum sequence
-sulfurovum_lithotrophicum_seq = open("epsilonproteobacteria/sulfurovum-lithotrophicum.fasta", "r")
-next(sulfurovum_lithotrophicum_seq)
-sulfurovum_lithotrophicum_seq = sulfurovum_lithotrophicum_seq.read()
-sulfurovum_lithotrophicum_seq = sulfurovum_lithotrophicum_seq.replace("\n", "")
-
-###################################################################################################
-# Part 2: Find all subsequences #
+#"epsilonproteobacteria/caminibacter-mediatlanticus.fasta"
+#"epsilonproteobacteria/helicobacter-pylori.fasta"
+#"epsilonproteobacteria/campylobacter-jejuni.fasta"
+#"epsilonproteobacteria/sulfurovum-lithotrophicum.fasta"
 
 
 def main():
@@ -88,8 +47,8 @@ def main():
     in the sequence itself.
 
     """
-    in_filename = "epsilonproteobacteria/sulfurovum-lithotrophicum.fasta"
-    filename = Path('epsilonproteobacteria/sulfurovum-lithotrophicum.fasta')
+    in_filename = "gammaproteobacteria/legionella-pneumophila.fasta"
+    filename = Path('gammaproteobacteria/legionella-pneumophila.fasta')
     sequences = SeqIO.parse(in_filename, 'fasta')
     for record in sequences:
         example = record
