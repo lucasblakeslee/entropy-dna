@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 from pathlib import Path
-from bio import SeqIO
+from Bio import SeqIO
+
 γproteo_database = Path("gammaproteobacteria_averages.db_txt")
 εproteo_database = Path("epsilonproteobacteria_averages.db_txt")
 
