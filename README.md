@@ -2,7 +2,7 @@
 
 ## Motivation
 
-In information theory, /entropy/ is defined as a measure of the
+In information theory, *entropy* is defined as a measure of the
 "information" contained within a system. Oftentimes this can be
 interpreted as a measure of disorder, or of the amount of surprise
 regarding the next piece of information. For example, if one has the
@@ -12,8 +12,8 @@ guess the next letter from a random point.
 
 The entropy of a sequence of DNA can give insight into a variety of
 information about that sequence, namely it can serve as an estimator
-of coding and non-coding regions of DNA, what are called /exons/ and
-/introns/ respectively. Intron regions, not being expressed, are not
+of coding and non-coding regions of DNA, what are called *exons* and
+*introns* respectively. Intron regions, not being expressed, are not
 subject to the same evolutionary pressures under which exon regions
 are held (though recent literature suggests that intron regions do
 play an integral role in gene expression regulation and have been
@@ -21,9 +21,9 @@ linked to some genetic diseases), so one might expect intron regions
 to have a higher entropy (implying greater disorder) than exon
 regions.
 
-Approximations for the /Shannon/ and /topological/ entropy of DNA
+Approximations for the *Shannon* and *topological* entropy of DNA
 sequences have been described by Schmitt & Herzel (1992) and Koslicki
-(2011) respectively. /Shannon/ and /topological/ entropy are
+(2011) respectively. *Shannon* and *topological* entropy are
 calculated slightly differently, the major difference being that
 topological entropy ignores the frequency with which different
 sequences occur, attempting to get around the fact that with Shannon
