@@ -1,4 +1,4 @@
-#!/bin/usr/env/Python3
+#!/bin/usr/env python3
 
 from collections import Counter
 import numpy as np

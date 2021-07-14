@@ -1,4 +1,4 @@
-#!/usr/bin/env/python3
+#!/usr/bin/env python3
 
 from pathlib import Path
 from bio import SeqIO
@@ -15,8 +15,8 @@ def main():
         unknown_org_seq = record
     unknown_org_seq = str(unknown_org_seq.seq)
     find_probability_T(unknown_org_seq):
-    likely_class(probability_gamma, probability_epsilon):
-    print(f"the sequence in {pseudomonas_atlantica_seq} most likely belongs to an organism of type")
+    org_type = likely_class(probability_gamma, probability_epsilon):
+    print(f"the sequence in {pseudomonas_atlantica_seq} most likely belongs to an organism of type {org_type}")
 
 def count_all_subsequences(seq, blocksize):
     counter = Counter(seq[i:(i+blocksize)] for i in range(len(seq)+1-blocksize))
