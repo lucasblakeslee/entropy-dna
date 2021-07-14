@@ -55,3 +55,5 @@ to make a database of recurring subsequences for individual sequences,
 and then a separate program that parses through a directory to find
 the average number of times a subsequence occurs in a class (including
 those that occur 0 times).
+
+All sequences have been obtained from the NCBI website's genome database
