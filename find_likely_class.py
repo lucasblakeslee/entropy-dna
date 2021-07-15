@@ -43,7 +43,7 @@ def find_probability_T(unknown_org_seq):
 
     unknown_seq_list = []
     for blocksize in range(20):
-        unknown_seq_list.append(find_all_sequences(unknown_org_seq, blocksize))
+        unknown_seq_list.append(find_all_subsequences(unknown_org_seq, blocksize))
 
     return probability_gamma, probability_epsilon
 
