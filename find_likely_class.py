@@ -7,17 +7,17 @@ from Bio import SeqIO
 εproteo_database = Path("epsilonproteobacteria_averages.db_txt")
 
 pseudoalteromonas_atlantica_seq = Path("pseudoalteromonas-atlantica.fasta")
-#Pseudoalteromonas atlantica is in the Gammaproteobacteria class
+# Pseudoalteromonas atlantica is in the Gammaproteobacteria class
 
 
 def main():
-    unknown_org_seq = seqIO.parse("pseudoalteromonas-atlantica.fasta", "fasta")
-    for record in sequences:
+    unknown_org_seq = SeqIO.parse("pseudoalteromonas-atlantica.fasta", "fasta")
+    for record in unknown_org_seq:
         unknown_org_seq = record
     unknown_org_seq = str(unknown_org_seq.seq)
-    find_probability_T(unknown_org_seq):
-    org_type = likely_class(probability_gamma, probability_epsilon):
-    print("the sequence in {pseudomonas_atlantica_seq} most likely belongs to an organism of type {org_type}".format)
+    find_probability_T(unknown_org_seq)
+    org_type = likely_class(probability_gamma, probability_epsilon)
+    print("the sequence in {pseudoalteromonas_atlantica_seq} most likely belongs to an organism of type {org_type}".format)
 
 def count_all_subsequences(seq, blocksize):
     counter = Counter(seq[i:(i+blocksize)] for i in range(len(seq)+1-blocksize))
@@ -55,7 +55,7 @@ def likely_class(probability_gamma, probability_epsilon):
         return gamma
     if probability_epsilon > probability_gamma:
         return epsilon
-    if probability_epsilon = probability_gamma:
+    if probability_epsilon == probability_gamma:
         return unknown
     
 
