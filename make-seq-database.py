@@ -29,8 +29,8 @@ def main():
     in the sequence itself.
 
     """
-    in_filename = "epsilonproteobacteria/sulfurovum-lithotrophicum.fasta"
-    filename = Path('epsilonproteobacteria/sulfurovum-lithotrophicum.fasta')
+    in_filename = "gammaproteobacteria/xanthomonas-citri.fasta"
+    filename = Path('gammaproteobacteria/xanthomonas-citri.fasta')
     sequences = SeqIO.parse(in_filename, 'fasta')
     for record in sequences:
         example = record
