@@ -29,8 +29,8 @@ def main():
     in the sequence itself.
 
     """
-    in_filename = "gammaproteobacteria/legionella-pneumophila.fasta"
-    filename = Path('gammaproteobacteria/legionella-pneumophila.fasta')
+    in_filename = "epsilonproteobacteria/sulfurovum-lithotrophicum.fasta"
+    filename = Path('epsilonproteobacteria/sulfurovum-lithotrophicum.fasta')
     sequences = SeqIO.parse(in_filename, 'fasta')
     for record in sequences:
         example = record
@@ -38,7 +38,7 @@ def main():
     #fixme: eliminate non AGTC values
     
     out_filename = filename.with_suffix(".db_txt").name
-    entropy = make_database(out_filename, seq, 10)
+    entropy = make_database(out_filename, seq, 15)
     print(entropy)                
 
         
