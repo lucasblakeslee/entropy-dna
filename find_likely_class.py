@@ -33,9 +33,8 @@ def main():
 
 
 def find_probability_vs_candidate(test_counts, candidate_counts):
-    test_sum = np.sum(test_counts.values())
-    candidate_sum = np.sum(candidate_counts.values())
-    print(test_sum)
+    test_sum = sum(test_counts.values())
+    candidate_sum = sum(candidate_counts.values())
     expectation_factor = test_sum/candidate_sum
     missing_expectation = expectation_factor*1/2
     counts_and_expectations = [(count,
@@ -53,10 +52,8 @@ def read_count_database(filename, blocksize):
         subsequence, counts = line.split()
         subsequence = subsequence.strip()
         if len(subsequence) == blocksize:
-            result[subsequence] = counts
+            result[subsequence] = float(counts)
     return result
-
-        
 
 
 def count_all_subsequences(seq, blocksize):
@@ -71,13 +68,6 @@ def find_all_subsequences(seq, blocksize):
     """
     combos = [seq[i:(i+blocksize)] for i in range(len(seq)+1-blocksize)]
     return combos
-
-
-    """Apply Poisson distribution
-    log(P(ci = ci_expected_t)) = sum(ci *ln(ci_expected_t) +k)
-    ci is the count of ith subsequence ci
-    t is the type of organism
-    """
 
     
 
