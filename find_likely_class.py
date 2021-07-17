@@ -21,8 +21,7 @@ def main():
     for record in SeqIO.parse("pseudoalteromonas-atlantica.fasta", 'fasta'):
         unknown_org_seq.append(str(record.seq))
         break  # we only want the first one
-    unknown_org_seq = str(unknown_org_seq)
-    unknown_org_seq = unknown_org_seq.upper()
+    unknown_org_seq = "".join(unknown_org_seq).upper()
     blocksize = 10
     unknown_counts = count_all_subsequences(unknown_org_seq, blocksize)
     for db_file in database_files:
