@@ -47,7 +47,7 @@ def main():
             #fixme: eliminate non AGTC values
             #currently done in terminal with sed -e '/^[^>]/s/[^ATGCatcg]/N/g' filename.fasta
             out_filename = Path(filename).with_suffix(".db_txt").name
-            entropy = make_database(out_filename, seq, 5)
+            entropy = make_database(out_filename, seq, 15)
             print(entropy)
 
 
