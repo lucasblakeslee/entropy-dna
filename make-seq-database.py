@@ -36,7 +36,7 @@ def main():
     information about the sequence, but for now we're just interested
     in the sequence itself.
     """
-    directory_name = "gammaproteobacteria"
+    directory_name = "epsilonproteobacteria"
     files = os.listdir(directory_name)
     for filename in files:
         with open(directory_name + "/" + filename) as in_filename:
