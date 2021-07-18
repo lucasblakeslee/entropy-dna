@@ -8,16 +8,23 @@ from Bio import SeqIO
 # Part 1 -- obtaining organisms' sequences
 
 #1a. gammaproteobacteria
-#"gammaproteobacteria/legionella-pneumophila.fasta"
-#"gammaproteobacteria/amphritea-japonica.fasta"
+#"gammaproteobacteria/thiohalobacter-thiocyanaticus.fasta"
+#"gammaproteobacteria/allofrancisella-guangzhouensis.fasta"
 #"gammaproteobacteria/haemophilus-influenzae.fasta"
-#"gammaproteobacteria/xanthomonas-citri.fasta"
+#"gammaproteobacteria/francisella-opportunistica.fasta"
+#"gammaproteobacteria/pasteurella-multocida.fasta"
 
 #1b. epsilonproteobacteria
 #"epsilonproteobacteria/caminibacter-mediatlanticus.fasta"
 #"epsilonproteobacteria/helicobacter-pylori.fasta"
 #"epsilonproteobacteria/campylobacter-jejuni.fasta"
 #"epsilonproteobacteria/sulfurovum-lithotrophicum.fasta"
+#"epsilonproteobacteria/arcobacter-venerupis.fasta"
+
+#fixme add to test genomes
+#"gammaproteobacteria/legionella-pneumophila.fasta"
+#"gammaproteobacteria/amphritea-japonica.fasta"
+#"gammaproteobacteria/xanthomonas-citri.fasta"
 
 # Part 2 -- making databases
 
