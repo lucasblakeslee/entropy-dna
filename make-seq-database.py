@@ -4,6 +4,7 @@ from collections import Counter
 import numpy as np
 from pathlib import Path
 from Bio import SeqIO
+import os
 
 # Part 1 -- obtaining organisms' sequences
 
@@ -34,21 +35,22 @@ def main():
     Bio.SeqRecord.SeqRecord class is very useful for storing other
     information about the sequence, but for now we're just interested
     in the sequence itself.
-
     """
-    in_filename = "gammaproteobacteria/xanthomonas-citri.fasta"
-    filename = Path('gammaproteobacteria/xanthomonas-citri.fasta')
-    sequences = SeqIO.parse(in_filename, 'fasta')
-    for record in sequences:
-        example = record
-    seq = str(example.seq)
-    #fixme: eliminate non AGTC values
-    
-    out_filename = filename.with_suffix(".db_txt").name
-    entropy = make_database(out_filename, seq, 15)
-    print(entropy)                
+    directory_name = "gammaproteobacteria"
+    files = os.listdir(directory_name)
+    for filename in files:
+        with open(directory_name + "/" + filename) as in_filename:
+            sequences = SeqIO.parse(in_filename, 'fasta')
+            for record in sequences:
+                example = record
+            seq = str(example.seq)
+            #fixme: eliminate non AGTC values
+            #currently done in terminal with sed -e '/^[^>]/s/[^ATGCatcg]/N/g' filename.fasta
+            out_filename = Path(filename).with_suffix(".db_txt").name
+            entropy = make_database(out_filename, seq, 5)
+            print(entropy)
 
-        
+
 def make_database(out_filename, sequence, max_blocksize=20, min_count=5):
     result = []
     with open(out_filename, 'w') as out_file:
