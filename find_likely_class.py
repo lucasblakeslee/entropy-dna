@@ -10,15 +10,15 @@ epsilonproteo_database = Path("epsilonproteobacteria_averages.db_txt")
 
 database_files = [gammaproteo_database, epsilonproteo_database]
 
-pseudoalteromonas_atlantica_seq = Path("pseudoalteromonas-atlantica.fasta")
+pseudoalteromonas_atlantica_seq = Path("test_genomes/pseudoalteromonas-atlantica.fasta")
 # Pseudoalteromonas atlantica is in the Gammaproteobacteria class
 
 
 def main():
-    # unknown_org_seq = SeqIO.parse("pseudoalteromonas-atlantica.fasta", "fasta")[0]
+    # unknown_org_seq = SeqIO.parse("test_genomes/pseudoalteromonas-atlantica.fasta", "fasta")[0]
     # 'FastaIterator' object is not scriptable
     unknown_org_seq = []
-    for record in SeqIO.parse("pseudoalteromonas-atlantica.fasta", 'fasta'):
+    for record in SeqIO.parse("test_genomes/pseudoalteromonas-atlantica.fasta", 'fasta'):
         unknown_org_seq.append(str(record.seq))
         break  # we only want the first one
     unknown_org_seq = "".join(unknown_org_seq).upper()
@@ -28,8 +28,6 @@ def main():
         db_counts = read_count_database(db_file, blocksize)
         prob = find_probability_vs_candidate(unknown_counts, db_counts)
         print(prob, db_file.name)
-    
-
 
 def find_probability_vs_candidate(test_counts, candidate_counts):
     test_sum = sum(test_counts.values())
@@ -68,7 +66,6 @@ def find_all_subsequences(seq, blocksize):
     combos = [seq[i:(i+blocksize)] for i in range(len(seq)+1-blocksize)]
     return combos
 
-    
 
 if __name__ == "__main__":
     main()
