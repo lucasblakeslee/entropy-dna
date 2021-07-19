@@ -5,11 +5,14 @@ from Bio import SeqIO
 from collections import Counter
 import numpy as np
 import random
+import re
 
-gammaproteo_database = Path("gammaproteobacteria_averages.db_txt")
-epsilonproteo_database = Path("epsilonproteobacteria_averages.db_txt")
+# gammaproteo_database = Path("gammaproteobacteria_databases_averages.db_txt")
+# epsilonproteo_database = Path("epsilonproteobacteria_databases_averages.db_txt")
+#
+# database_files = [gammaproteo_database, epsilonproteo_database]
 
-database_files = [gammaproteo_database, epsilonproteo_database]
+database_files = list(Path().glob("*databases_averages.db_txt"))
 
 test_sequence = "xanthomonas-citri.fasta"
 pseudoalteromonas_atlantica_seq = Path("test_genomes/gamma_test_genomes/" + test_sequence)
