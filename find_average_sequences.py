@@ -1,8 +1,10 @@
 import os
+from pathlib import Path
 
 def average_files(directory_path):
-    files = os.listdir(directory_path)
+    db_directory_names = list(Path(".").glob("*_databases"))
 
+    files = os.listdir(directory_path)
     sequences = {}
     for file_name in files:
         with open(directory_path + "/" + file_name) as file_data:
