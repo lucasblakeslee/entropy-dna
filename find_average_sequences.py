@@ -14,10 +14,10 @@ def average_files(directory_path):
                 else:
                     sequences[sequence] = occurences
     
-    with open("gammaproteobacteria_averages.db_txt", "w+") as f:
+    with open("epsilonproteobacteria_averages.db_txt", "w+") as f:
         output = ""
         for key, value in sequences.items():
             output = output + f"{key} {value}\n"
         f.write(output[:-1])
 
-average_files('gammaproteobacteria_databases')
+average_files('epsilonproteobacteria_databases')
