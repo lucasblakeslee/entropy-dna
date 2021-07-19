@@ -4,26 +4,31 @@ from pathlib import Path
 from Bio import SeqIO
 from collections import Counter
 import numpy as np
+import random
 
 gammaproteo_database = Path("gammaproteobacteria_averages.db_txt")
 epsilonproteo_database = Path("epsilonproteobacteria_averages.db_txt")
 
 database_files = [gammaproteo_database, epsilonproteo_database]
 
-pseudoalteromonas_atlantica_seq = Path("test_genomes/pseudoalteromonas-atlantica.fasta")
-# Pseudoalteromonas atlantica is in the Gammaproteobacteria class
+test_sequence = "xanthomonas-citri.fasta"
+pseudoalteromonas_atlantica_seq = Path("test_genomes/gamma_test_genomes/" + test_sequence)
 
 
 def main():
-    # unknown_org_seq = SeqIO.parse("test_genomes/pseudoalteromonas-atlantica.fasta", "fasta")[0]
-    # 'FastaIterator' object is not scriptable
     unknown_org_seq = []
-    for record in SeqIO.parse("test_genomes/pseudoalteromonas-atlantica.fasta", 'fasta'):
+    for record in SeqIO.parse("test_genomes/gamma_test_genomes/"+test_sequence, 'fasta'):
         unknown_org_seq.append(str(record.seq))
         break  # we only want the first one
     unknown_org_seq = "".join(unknown_org_seq).upper()
-    blocksize = 10
+    # first_half, second_half = unknown_org_seq[:len(unknown_org_seq)//2],
+                              # unknown_org_seq[len(unknown_org_seq)//2:]
+    # scales with sequence length
+    blocksize = 15
     unknown_counts = count_all_subsequences(unknown_org_seq, blocksize)
+    # can input random_seq(2000000)
+    # also first_half and second_half
+    print(test_sequence)
     for db_file in database_files:
         db_counts = read_count_database(db_file, blocksize)
         prob = find_probability_vs_candidate(unknown_counts, db_counts)
@@ -66,6 +71,8 @@ def find_all_subsequences(seq, blocksize):
     combos = [seq[i:(i+blocksize)] for i in range(len(seq)+1-blocksize)]
     return combos
 
+def random_seq(seq_len):
+    return ''.join(random.choice('CGTA') for _ in range(seq_len))
 
 if __name__ == "__main__":
     main()
