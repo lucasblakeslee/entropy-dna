@@ -22,11 +22,6 @@ import os
 #"epsilonproteobacteria/sulfurovum-lithotrophicum.fasta"
 #"epsilonproteobacteria/arcobacter-venerupis.fasta"
 
-#fixme add to test genomes
-#"gammaproteobacteria/legionella-pneumophila.fasta"
-#"gammaproteobacteria/amphritea-japonica.fasta"
-#"gammaproteobacteria/xanthomonas-citri.fasta"
-
 # Part 2 -- making databases
 
 def main():
