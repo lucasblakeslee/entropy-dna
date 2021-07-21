@@ -4,24 +4,37 @@ import numpy as np
 from pathlib import Path
 from Bio import SeqIO
 from collections import Counter
+import matplotlib.pyplot as plt
 
 database_files = list(Path().glob("*databases_averages.db_txt"))
-test_sequence = "xanthomonas-citri.fasta"
+tests_directory = Path("test_genomes")
 
 
 def main():
-    unknown_org_seq = []
-    for record in SeqIO.parse("test_genomes/gamma_test_genomes/"+test_sequence, 'fasta'):
-        unknown_org_seq.append(str(record.seq))
-        break  # we only want the first one
-    unknown_org_seq = "".join(unknown_org_seq).upper()
+    results = {}
+    for subdirectory in tests_directory.iterdir():
+        for filename in subdirectory.iterdir():
+            unknown_org_seq = []
+            for record in SeqIO.parse(filename, 'fasta'):
+                unknown_org_seq.append(str(record.seq))
+                break  # we only want the first one
+            unknown_org_seq = "".join(unknown_org_seq).upper()
 
-    blocksize = 15
-    unknown_counts = count_all_subsequences(unknown_org_seq, blocksize)
-    for db_file in database_files:
-        expected_class_counts = read_count_database(db_file, blocksize)
-        result = func(unknown_counts, expected_class_counts)
-        print(result, db_file.name)
+            blocksize = 15
+            unknown_counts = count_all_subsequences(unknown_org_seq, blocksize)
+            for db_file in database_files:
+                expected_class_counts = read_count_database(db_file, blocksize)
+                result = func(unknown_counts, expected_class_counts)
+                results[f"result_{db_file}_{filename}"] = result
+                print(result, db_file.name)
+    for key,value in results.items():
+        if key.startswith('result_epsilonproteobacteria'):
+            x = value
+            plt.scatter(x, 1, c='b')
+        else:
+            y = value
+            plt.scatter(y, 1, c='g')
+    plt.show()
 
 
 def func(unknown_counts, expected_class_counts):
@@ -62,6 +75,8 @@ def read_count_database(filename, blocksize):
             result[subsequence] = float(counts)
     return result
 
+def plot_values(epsilon, gamma):
+    plot
 
 if __name__ == "__main__":
     main()
