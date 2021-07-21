@@ -26,20 +26,28 @@ def main():
 
 def func(unknown_counts, expected_class_counts):
     """Given the (C_i, E_i) values of (counts in unknown sequence, expected counts
-averaged from a class) we can define a function:"""
-    unknown_counts_values = unknown_counts.values()
-    expected_counts_values = expected_class_counts.values()
-    logs_of_unknown_values = []
-    logs_of_counts_values = []
-    for entry in unknown_counts_values:
-        logs_of_unknown_values.append(math.log(entry))
-    for entry in expected_counts_values:
-        logs_of_counts_values.append(math.log(entry))
-    logs_unknown_arr = np.array(logs_of_unknown_values)
-    logs_counts_arr = np.array(logs_of_counts_values)
-    normalization = math.sqrt(np.sum(logs_unknown_arr)**2* np.sum(logs_counts_arr)**2)
-    result = np.sum(logs_unknown_arr * logs_counts_arr)/normalization
+        averaged from a class) we can define a function:"""
+    unknown_values, expected_values = find_counts_and_expectations(unknown_counts, expected_class_counts)
+    unknown_log = np.log(unknown_values)
+    expected_log = np.log(expected_values)
+    normalization = math.sqrt(np.sum(unknown_log ** 2) * np.sum(expected_log**2))
+    result = np.sum(unknown_log * expected_log)/normalization
     return result
+
+
+def find_counts_and_expectations(test_counts, candidate_counts):
+    test_sum = sum(test_counts.values())
+    candidate_sum = sum(candidate_counts.values())
+    expectation_factor = test_sum / candidate_sum
+    missing_expectation = expectation_factor * 1 / 2
+    counts_and_expectations = [(count,
+                                (expectation_factor * candidate_counts[subsequence])
+                                if subsequence in candidate_counts
+                                else missing_expectation)
+                               for subsequence, count in test_counts.items()]
+    counts_and_expectations_np = np.array(counts_and_expectations)
+    return counts_and_expectations_np[:,0], counts_and_expectations_np[:,1]
+
 
 def count_all_subsequences(seq, blocksize):
     counter = Counter(seq[i:(i+blocksize)] for i in range(len(seq)+1-blocksize))
