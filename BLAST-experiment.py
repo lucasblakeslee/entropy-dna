@@ -13,6 +13,8 @@ def blast_search(SeqIOrecord):
     result_handle = NCBIWWW.qblast("blastn", "nt", SeqIOrecord.seq[1:100])
     return result_handle
 
+
+
 if __name__ == "__main__":
     main()
 

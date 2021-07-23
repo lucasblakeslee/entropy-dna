@@ -27,6 +27,7 @@ def main():
                 result = func(unknown_counts, expected_class_counts)
                 results[f"result_{db_file}_{filename}"] = result
                 print(result, db_file.name)
+    print(results)
     for key,value in results.items():
         if key.startswith('result_epsilonproteobacteria'):
             x = value
@@ -44,7 +45,7 @@ def func(unknown_counts, expected_class_counts):
     unknown_log = np.log(unknown_values)
     expected_log = np.log(expected_values)
     normalization = math.sqrt(np.sum(unknown_log ** 2) * np.sum(expected_log**2))
-    result = np.sum(unknown_log * expected_log)/normalization
+    result = -np.sum(unknown_log * expected_log)/normalization
     return result
 
 
