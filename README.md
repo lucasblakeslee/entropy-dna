@@ -6,21 +6,27 @@ See paper at https://github.com/lucasblakeslee/entropy-dna/blob/master/entropy-p
 
 Running the code requires that some programs be executed before others.
 First:
-'''
+
+```
 python3 make-seq-database.py
-'''
+```
+
 in order to make the sequence count databases
 
 Then, you can run
-'''
+
+```
 python3 find_average_sequences.py
-'''
+```
+
 in order to create averaged class databases
 
 Lastly,
-'''
+
+```
 python3 func_test.py
-'''
+```
+
 in order to test the probabilities of the test genomes falling into
 either class
 
